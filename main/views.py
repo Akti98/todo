@@ -13,3 +13,4 @@ def second(request):
 
 def third (request):
     return HttpResponse("This is page test3.")
+
