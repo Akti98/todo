@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo</title>
+    <title>Books</title>
     <link rel="stylesheet" href="{% static 'styles/index.css' %}" >
     <link rel="stylesheet" href=" {% static 'styless/checbo.css' %}">
 </head>
@@ -19,17 +19,17 @@
             <button class="create_button">Дабавить</button>
         </div>
         <div class="todo_container">
-            {% for todo in todo_list %}
+            {% for books in books_list %}
             <div class="todo_item">
                 <div class="todo_item_header">
                     <label class="checkbox container" >
                         <input type="checkbox">
                         <span class="checkmark"></span>
                     </label>
-                    <h4>{{ todo.text }}</h4>
+                    <h4>{{ books.text }}</h4>
                 </div>
                 <div class="todo_item_footer">
-                    <p>{{ todo.created_at }}</p>
+                    <p>{{ books.created_at }}</p>
                     <div class="action_buttons">
                         <img src="../icons/Без названия.png"/>
                         <img src="../icons/Без названия (1).png"/>
