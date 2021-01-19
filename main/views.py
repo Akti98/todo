@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import ToDo
 
-
 def homepage (request):
     return render(request,"index.html")
 
@@ -16,5 +15,6 @@ def second(request):
 
 def third (request):
     return HttpResponse("This is page test3.")
+
 
 
