@@ -7,13 +7,4 @@ class ToDo(models.Model):
     is_closed = models.BooleanField(default=False)
     is_favorite = models.BooleanField(default=False)
 
-class Books(models.Model):
-    title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-    price = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
-    author = models.CharField(max_length=50)
-    year_at = models.CharField(max_length=100)
-    created_at = models.DateField(auto_now_add=True)
     
