@@ -16,13 +16,6 @@ def second(request):
 def third (request):
     return HttpResponse("This is page test3.")
 
-def book(request):
-    book_list = Book.objects.all()
-    return render(
-        request, 
-        "books.html",
-        {"book_list" : book_list}
-    )
 
 def add_todo(request):
     form = request.POST
@@ -32,16 +25,24 @@ def add_todo(request):
     return redirect(test)
 
 
-def add_book(request):
-    form = request.POST
-    text = form["book_text"]
-    book = Book(text=text)
-    book.save()
-    return redirect(book)
+
 
 def delete_todo(request, id):
     todo = ToDo.objects.get(id=id)
     todo.delete()
     return redirect(test)
+
+def mark_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.is_favorite = True
+    todo.save()
+    return redirect(test)
+
+def unmark_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.is_favorite = False
+    todo.save()
+    return redirect(test)
+
 
 
