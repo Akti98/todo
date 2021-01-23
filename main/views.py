@@ -40,4 +40,16 @@ def unmark_todo(request, id):
     todo.save()
     return redirect(test)
 
+def close_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.is_closed = not todo.is_closed
+    todo.save()
+    return redirect(test)
 
+def book(request):
+    book_list = Book.objects.all()
+    return render(
+        request, 
+        "books.html",
+        {"book_list" : book_list}
+    )
