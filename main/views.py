@@ -49,12 +49,19 @@ def book(request):
     book_list = Book.objects.all()
     return render(request, "books.html", {"book_list": book_list})
 
+
 def delete_book(request, id):
     book_list = Book.objects.get(id=id)
     book_list.delete()
     return redirect(book)
 
 def mark_book(request, id):
+    book_list = Book.objects.get(id=id)
+    book_list.is_favorite = not book_list.is_favorite
+    book_list.save()
+    return redirect(book)
+
+def unmark_book(request, id):
     book_list = Book.objects.get(id=id)
     book_list.is_favorite = not book_list.is_favorite
     book_list.save()

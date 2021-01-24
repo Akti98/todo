@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shop</title>
-    <link rel="stylesheet" href="{% static 'styles/index_book.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/book.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
 </head>
 <body>
@@ -85,10 +85,10 @@
                     <h5>{{ book.author }}</h5>
                 </div>
                 <div class="book_item_footer">
-                    <p>{{ book.price }}</p>
+                    <p>{{ book.price }}сом</p>
                     <div class="action_buttons">
                         {% if book.is_favorite %}
-                            <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/Без названия1.png' %}" /></a>
+                            <a href="{% url 'unmark-book' book.id %}"><img src="{% static './icons/Без названия1.png' %}" /></a>
                         {% else %}
                             <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/Без названия.png' %}" /></a>
                         {% endif %}
