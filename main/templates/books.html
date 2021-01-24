@@ -5,22 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shop</title>
-  
+    <link rel="stylesheet" href="{% static 'styles/index_book.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
 </head>
 <body>
-    <h1>Книжный магазин</h1>
-    <h4>Homework 32</h4>
-    {% for book in book_list %}
-        <h1>{{ book.title }}</h1>
-        <h2> Автор:{{ book.author }} </h2>
-        <h3> Цена:{{ book.price}}</h3> 
-        <h4> Жанр:{{ book.genre}}</h4>
-        <h5>{{book.subtitle}} </h5> 
-        <h5>Описание:({{book.description}})</h5>
-        <h5>{{ book.date }}</h5>
-        <h5> Год выхода:{{book.year}}</h5> 
-    
-       
-    {% endfor %}
+    <section>
+        <div class="create_container">
+            <form action="{% url 'add-book' %}" method="POST">
+                {% csrf_token %}
+                <input
+                    class="create_title"
+                    type="text"
+                    placeholder="Введите заголовок книги"
+                    name="book_title"
+                />
+                <input
+                    class="create_subtitle"
+                    type="text"
+                    placeholder="Введите подзаголовок книги"
+                    name="book_subtitle"
+                />
+                <input
+                    class="create_description"
+                    type="text"
+                    placeholder="Введите описание книги"
+                    name="book_description"
+                />
+                <input
+                    class="create_price"
+                    type="text"
+                    placeholder="Введите цену книги"
+                    name="book_price"
+                />
+                <input
+                    class="create_genre"
+                    type="text"
+                    placeholder="Введите жанр книги"
+                    name="book_genre"
+                />
+                <input
+                    class="create_author"
+                    type="text"
+                    placeholder="Введите автора книги"
+                    name="book_author"
+                />
+                <input
+                    class="create_year"
+                    type="number"
+                    placeholder="Введите год выхода книги"
+                    name="book_year"
+                />
+                <div>
+                    <button class="create_button">Добавить книгу</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="book_container">
+            {% for book in book_list %}
+            <div class="book_item
+                {% if book.is_favorite %}
+                    marked
+                {% elif book.is_closed %}
+                    done
+                {% endif %}
+            ">
+                <div class="book_item_title">
+                    <label class="checkbox_container">
+                        <input type="checkbox"
+                            {% if book.is_closed %}
+                                checked
+                            {% endif %}
+                        />
+                        <span class="checkmark"></span>
+                    </label>
+                    <h4><a href="{% url 'close-book' book.id %}">{{ book.title }}</a></h4>
+                </div>
+                <div>
+                    <h5>{{ book.author }}</h5>
+                </div>
+                <div class="book_item_footer">
+                    <p>{{ book.price }}</p>
+                    <div class="action_buttons">
+                        {% if book.is_favorite %}
+                            <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/Без названия1.png' %}" /></a>
+                        {% else %}
+                            <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/Без названия.png' %}" /></a>
+                        {% endif %}
+
+                        <a href="{% url 'delete-book' book.id %}"><img src="{% static './icons/Без названия (1).png' %}" /></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 </body>
 </html>
